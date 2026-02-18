@@ -1,5 +1,4 @@
 ---
-import { useStoryblokApi } from "@storyblok/astro";
 import { fetchPosts, type PostModel } from "../../api/post";
 import RootLayout from "../../components/layouts/RootLayout.astro";
 
@@ -18,24 +17,17 @@ export async function getStaticPaths() {
   }));
 }
 
-// const storyblokApi = useStoryblokApi();
-
-// const { data } = await storyblokApi.get("cdn/stories/test-astro", {
-//   version: "published",
-// });
-
-// const story = data.story;
-
 const { post } = Astro.props;
 ---
 
 <RootLayout title={post.title}>
-  <header>
-    <h1>{post.title}</h1>
-    <span>Post ID: {post.id}</span>
-    <span>User ID: {post.userId}</span>
+  <header class="p-8 space-y-4">
+    <h1 class="text-5xl font-bold first-letter:uppercase">{post.title}</h1>
+    <div class="text-gray-300">Post ID: {post.id}</div>
+    <div class="text-gray-300">User ID: {post.userId}</div>
   </header>
-  <main>
-    <p>{post.body}</p>
+  <main class="px-8">
+    <h5 class="text-xl font-medium">Descripción:</h5>
+    <p class="text-lg text-gray-300">{post.body}</p>
   </main>
 </RootLayout>

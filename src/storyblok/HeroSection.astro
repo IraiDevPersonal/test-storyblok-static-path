@@ -1,7 +1,16 @@
 ---
+import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro";
+
 const { blok } = Astro.props;
+const fromColor = blok.from_color.color;
+const toColor = blok.to_color.color;
+const action = blok.action;
 ---
 
-<section>
-  <h1>{blok.title}</h1>
+<section
+  class={`p-8 text-white flex flex-col gap-y-8 justify-center items-center h-[40dvh]`}
+  style={`background: linear-gradient(to bottom right, ${fromColor}, ${toColor})`}
+>
+  <h2 class="text-5xl font-extrabold">{blok.title}</h2>
+  {action.map((component: any) => <StoryblokComponent blok={component} />)}
 </section>

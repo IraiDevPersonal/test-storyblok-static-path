@@ -1,0 +1,14 @@
+---
+import { useStoryblokApi } from "@storyblok/astro";
+import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro";
+
+const { slug } = Astro.params;
+
+const storyblokApi = useStoryblokApi();
+
+const { data } = await storyblokApi.get(`cdn/stories/${slug ?? "home"}`, {
+  version: "draft",
+});
+---
+
+<StoryblokComponent blok={data.story.content} />

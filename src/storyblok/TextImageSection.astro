@@ -1,0 +1,18 @@
+---
+const { blok } = Astro.props;
+---
+
+<article class="grid grid-cols-2">
+  <img
+    class:list={blok.reverse ? "order-first" : "order-last"}
+    src={blok.image.filename}
+    alt={blok.title}
+    class="w-full h-auto max-w-full aspect-video object-cover object-center"
+    loading="lazy"
+    decoding="async"
+  />
+  <div class="p-4 bg-gray-100">
+    <h5 class="text-2xl font-medium text-gray-800">{blok.title}</h5>
+    <p class="text-sm text-gray-500">{blok.description}</p>
+  </div>
+</article>

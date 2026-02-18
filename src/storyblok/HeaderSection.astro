@@ -1,0 +1,10 @@
+---
+const { blok } = Astro.props;
+---
+
+<div class="flex items-center gap-2">
+  <figure class="[&_svg]:size-8">
+    <Fragment set:html={blok.svg} />
+  </figure>
+  <span class="font-medium">{blok.title}</span>
+</div>

@@ -1,25 +1,26 @@
 ---
 import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro";
 import { fetchPosts } from "../api/post";
+import PostSection from "../components/PostSection.astro";
+import RootLayout from "../components/layouts/RootLayout.astro";
 
 const { blok } = Astro.props;
 
-console.log(blok);
 const posts = await fetchPosts();
 ---
 
-<main>
-  <h1>{blok.title}</h1>
-
-  <ul>
+<RootLayout title={blok.title}>
+  <header class="px-8 py-4">
     {
-      posts.map((post) => (
-        <li>
-          <a href={`/post/${post.id}`}>{post.title}</a>
-        </li>
+      blok.header.map((component: any) => (
+        <StoryblokComponent blok={component} />
       ))
     }
-  </ul>
+  </header>
 
-  {blok.body.map((blok: any) => <StoryblokComponent blok={blok} />)}
-</main>
+  <main>
+    {blok.body.map((component: any) => <StoryblokComponent blok={component} />)}
+
+    {blok.show_posts && <PostSection posts={posts} />}
+  </main>
+</RootLayout>
