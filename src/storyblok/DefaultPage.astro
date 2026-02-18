@@ -1,0 +1,25 @@
+---
+import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro";
+import { fetchPosts } from "../api/post";
+
+const { blok } = Astro.props;
+
+console.log(blok);
+const posts = await fetchPosts();
+---
+
+<main>
+  <h1>{blok.title}</h1>
+
+  <ul>
+    {
+      posts.map((post) => (
+        <li>
+          <a href={`/post/${post.id}`}>{post.title}</a>
+        </li>
+      ))
+    }
+  </ul>
+
+  {blok.body.map((blok: any) => <StoryblokComponent blok={blok} />)}
+</main>
