@@ -3,7 +3,6 @@ import { defineConfig } from "astro/config";
 import mkcert from "vite-plugin-mkcert";
 import tailwindcss from "@tailwindcss/vite";
 import node from "@astrojs/node";
-// import vercel from "@astrojs/vercel";
 import { loadEnv } from "vite";
 
 const { STORYBLOK_TOKEN_PREVIEW, IS_LOCAL } = loadEnv(
