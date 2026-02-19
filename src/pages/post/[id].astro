@@ -1,22 +1,32 @@
 ---
+// Obtiene todos los posts de la API y tipifica la prop del layout
 import { fetchPosts, type PostModel } from "../../api/post";
 import RootLayout from "../../components/layouts/RootLayout.astro";
 
+// Define la forma de las props que Astro inyectará en esta página en tiempo de build
 type Props = {
   post: PostModel;
 };
 
+// Le indica a Astro que pre-renderice esta página como HTML estático en tiempo de build.
+// Sin esto, Astro intentaría renderizar la página en el servidor en cada request.
 export const prerender = true;
 
+// Requerida al usar rutas dinámicas ([id]) con prerender = true.
+// Astro llama a esta función en tiempo de build para saber qué paths generar.
+// Debe retornar un array de objetos { params, props }.
 export async function getStaticPaths() {
+  // Obtiene todos los posts para generar una página por cada uno
   const posts = await fetchPosts();
 
+  // Cada objeto mapea un parámetro de URL (id) al dato (post) que se pasa como prop
   return posts.map((post) => ({
-    params: { id: post.id.toString() },
-    props: { post },
+    params: { id: post.id.toString() }, // se convierte en el [id] de la URL
+    props: { post }, // disponible vía Astro.props en este archivo
   }));
 }
 
+// Desestructura el post inyectado por getStaticPaths para usarlo en el template
 const { post } = Astro.props;
 ---
 
