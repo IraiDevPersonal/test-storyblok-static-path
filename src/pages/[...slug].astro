@@ -1,14 +1,27 @@
 ---
+// [...slug].astro — Página dinámica catch-all.
+// El nombre [...slug] le indica a Astro que este archivo captura cualquier
+// ruta que no tenga una página estática definida, por ejemplo:
+//   /about        → slug = "about"
+//   /blog/my-post → slug = "blog/my-post"
+//   /             → slug = undefined (se usa "home" como fallback)
+
 import { useStoryblokApi } from "@storyblok/astro";
 import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro";
 
+// Astro expone el segmento capturado por [...slug] en Astro.params.slug
 const { slug } = Astro.params;
 
 const storyblokApi = useStoryblokApi();
 
+// Busca la story en Storyblok cuyo path coincida con el slug.
+// Si no hay slug (ruta raíz "/"), solicita la story "home".
 const { data } = await storyblokApi.get(`cdn/stories/${slug ?? "home"}`, {
   version: "draft",
 });
 ---
 
+{
+  /* Renderiza el contenido de la story usando el componente correspondiente en Storyblok */
+}
 <StoryblokComponent blok={data.story.content} />
