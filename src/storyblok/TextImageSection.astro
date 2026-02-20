@@ -1,11 +1,17 @@
 ---
+import type { TextImageSectionBlok } from "../types/storyblok/test-space";
+
+type Props = {
+  blok: TextImageSectionBlok;
+};
+
 const { blok } = Astro.props;
 ---
 
 <article class="grid grid-cols-2">
   <img
     class:list={blok.reverse ? "order-first" : "order-last"}
-    src={blok.image.filename}
+    src={blok.image?.filename}
     alt={blok.title}
     class="w-full h-auto max-w-full aspect-video object-cover object-center"
     loading="lazy"
