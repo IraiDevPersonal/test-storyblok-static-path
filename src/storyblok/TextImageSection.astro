@@ -8,17 +8,29 @@ type Props = {
 const { blok } = Astro.props;
 ---
 
-<article class="grid grid-cols-2">
-  <img
-    class:list={blok.reverse ? "order-first" : "order-last"}
-    src={blok.image?.filename}
-    alt={blok.title}
-    class="w-full h-auto max-w-full aspect-video object-cover object-center"
-    loading="lazy"
-    decoding="async"
-  />
-  <div class="p-4 bg-gray-100">
-    <h5 class="text-2xl font-medium text-gray-800">{blok.title}</h5>
-    <p class="text-sm text-gray-500">{blok.description}</p>
+<article
+  class="overflow-hidden rounded-2xl border border-white/10 bg-white/5 shadow-[0_0_0_1px_rgba(255,255,255,0.04)_inset]"
+>
+  <div class="grid gap-0 md:grid-cols-2">
+    <div class:list={blok.reverse ? "md:order-2" : "md:order-1"}>
+      <img
+        src={blok.image?.filename}
+        alt={blok.title}
+        class="h-full w-full max-w-full object-cover object-center md:aspect-auto aspect-video"
+        loading="lazy"
+        decoding="async"
+      />
+    </div>
+    <div
+      class:list={blok.reverse ? "md:order-1" : "md:order-2"}
+      class="flex flex-col justify-center gap-3 p-6 sm:p-8"
+    >
+      <h5 class="text-xl font-semibold tracking-tight text-white sm:text-2xl">
+        {blok.title}
+      </h5>
+      <p class="text-sm leading-6 text-white/70 sm:text-base">
+        {blok.description}
+      </p>
+    </div>
   </div>
 </article>

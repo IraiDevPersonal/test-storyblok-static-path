@@ -16,21 +16,31 @@ const posts = await fetchPosts();
 ---
 
 <RootLayout title={blok.title ?? ""}>
-  <header class="px-8 py-4">
-    {
-      blok.header?.map((component) => (
-        <StoryblokComponent blok={component as SbBlokData} />
-      ))
-    }
-  </header>
+  <div class="min-h-screen bg-linear-to-b from-zinc-950 via-black to-zinc-950">
+    <header class="border-b border-white/10 bg-black/40 backdrop-blur">
+      <div
+        class="mx-auto flex max-w-5xl items-center justify-between gap-4 px-6 py-4"
+      >
+        {
+          blok.header
+            ?.filter(Boolean)
+            .map((component) => (
+              <StoryblokComponent blok={component as SbBlokData} />
+            ))
+        }
+      </div>
+    </header>
 
-  <main>
-    {
-      blok.body?.map((component) => (
-        <StoryblokComponent blok={component as SbBlokData} />
-      ))
-    }
+    <main class="mx-auto max-w-5xl space-y-10 px-6 py-10">
+      {
+        blok.body
+          ?.filter(Boolean)
+          .map((component) => (
+            <StoryblokComponent blok={component as SbBlokData} />
+          ))
+      }
 
-    {blok.show_posts && <PostSection posts={posts} />}
-  </main>
+      {blok.show_posts && <PostSection posts={posts} />}
+    </main>
+  </div>
 </RootLayout>
