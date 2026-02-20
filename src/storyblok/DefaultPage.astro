@@ -3,23 +3,33 @@ import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro";
 import { fetchPosts } from "../api/post";
 import PostSection from "../components/PostSection.astro";
 import RootLayout from "../components/layouts/RootLayout.astro";
+import type { DefaultPageBlok } from "../types/storyblok/test-space";
+import type { SbBlokData } from "@storyblok/astro";
+
+type Props = {
+  blok: DefaultPageBlok;
+};
 
 const { blok } = Astro.props;
 
 const posts = await fetchPosts();
 ---
 
-<RootLayout title={blok.title}>
+<RootLayout title={blok.title ?? ""}>
   <header class="px-8 py-4">
     {
-      blok.header.map((component: any) => (
-        <StoryblokComponent blok={component} />
+      blok.header?.map((component) => (
+        <StoryblokComponent blok={component as SbBlokData} />
       ))
     }
   </header>
 
   <main>
-    {blok.body.map((component: any) => <StoryblokComponent blok={component} />)}
+    {
+      blok.body?.map((component) => (
+        <StoryblokComponent blok={component as SbBlokData} />
+      ))
+    }
 
     {blok.show_posts && <PostSection posts={posts} />}
   </main>

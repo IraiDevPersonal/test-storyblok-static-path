@@ -1,10 +1,16 @@
 ---
 import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro";
+import type { SbBlokData } from "@storyblok/astro";
+import type { HeroSectionBlok } from "../types/storyblok/test-space";
+
+type Props = {
+  blok: HeroSectionBlok;
+};
 
 const { blok } = Astro.props;
-const fromColor = blok.from_color.color;
-const toColor = blok.to_color.color;
-const action = blok.action;
+const fromColor = blok.from_color?.color;
+const toColor = blok.to_color?.color;
+const action = blok.action ?? [];
 ---
 
 <section
@@ -12,5 +18,9 @@ const action = blok.action;
   style={`background: linear-gradient(to bottom right, ${fromColor}, ${toColor})`}
 >
   <h2 class="text-5xl font-extrabold">{blok.title}</h2>
-  {action.map((component: any) => <StoryblokComponent blok={component} />)}
+  {
+    action.map((component) => (
+      <StoryblokComponent blok={component as SbBlokData} />
+    ))
+  }
 </section>
