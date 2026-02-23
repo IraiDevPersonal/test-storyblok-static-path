@@ -1,0 +1,34 @@
+---
+
+---
+
+<div class="flex items-center gap-x-2">
+  <button
+    class="p-2 bg-orange-500 rounded-xl grid place-content-center h-10 w-10"
+    id="btn-dec">-</button
+  >
+  <span id="count">0</span>
+  <button
+    class="p-2 bg-orange-500 rounded-xl grid place-content-center h-10 w-10"
+    id="btn-inc">+</button
+  >
+</div>
+
+<script>
+  import { increment, decrement } from "../../lib/utils/counter";
+  const count = document.querySelector("#count")!;
+  const btnInc = document.querySelector("#btn-inc")!;
+  const btnDec = document.querySelector("#btn-dec")!;
+
+  let value = 0;
+
+  btnInc.addEventListener("click", () => {
+    value = increment(value);
+    count.textContent = String(value);
+  });
+
+  btnDec.addEventListener("click", () => {
+    value = decrement(value);
+    count.textContent = String(value);
+  });
+</script>

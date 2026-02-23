@@ -6,6 +6,8 @@ dist/
 .windsurf/
 .agent/
 .agents/
+test-results/
+playwright-report/
 
 
 # dependencies

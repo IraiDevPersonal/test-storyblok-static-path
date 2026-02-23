@@ -3,14 +3,15 @@ import { defineConfig, envField } from "astro/config";
 import mkcert from "vite-plugin-mkcert";
 import tailwindcss from "@tailwindcss/vite";
 import node from "@astrojs/node";
-import { loadEnv } from "vite";
+import { envsConfig } from "./envs.config";
 
-const { STORYBLOK_TOKEN_PREVIEW, STORYBLOK_TOKEN, IS_PREVIEW } = loadEnv(
-  process.env.NODE_ENV,
-  process.cwd(),
-  "",
-);
-const isPreview = IS_PREVIEW === "true";
+const {
+  port,
+  isPreview,
+  isDevelopment,
+  storyblokToken,
+  storyblokTokenPreview
+} = envsConfig
 
 export default defineConfig({
   env: {
@@ -26,17 +27,27 @@ export default defineConfig({
         optional: true,
         default: false,
       }),
+      PORT: envField.number({
+        context: "server",
+        access: "secret",
+        optional: true,
+        default: port,
+        int: true,
+      })
     },
   },
+  server: {
+    port: isDevelopment ? port : undefined,
+  },
   vite: {
-    plugins: [isPreview && mkcert(), tailwindcss()],
+    plugins: [isPreview ? mkcert(): [], tailwindcss()],
     server: {
       https: isPreview,
     },
   },
   integrations: [
     storyblok({
-      accessToken: isPreview ? STORYBLOK_TOKEN_PREVIEW : STORYBLOK_TOKEN,
+      accessToken: isPreview ? storyblokTokenPreview : storyblokToken,
       apiOptions: {
         region: "eu",
       },
