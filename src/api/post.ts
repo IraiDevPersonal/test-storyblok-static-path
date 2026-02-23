@@ -1,5 +1,5 @@
- import { createMemoryCacheClient } from "../lib/cacheClient";
- import { createFetchHttpClient } from "../lib/httpClient";
+ import { MemoryCacheClient } from "../lib/cache-client";
+ import { HttpClient } from "../lib/http-client";
 
 export type PostModel = {
   userId: number;
@@ -8,15 +8,15 @@ export type PostModel = {
   body: string;
 };
 
-const httpClient = createFetchHttpClient();
-const cacheClient = createMemoryCacheClient();
+const httpClient = new HttpClient("https://jsonplaceholder.typicode.com");
+const cacheClient = new MemoryCacheClient("posts");
 
 export async function fetchPosts() {
-  const url = "https://jsonplaceholder.typicode.com/posts?userId=8";
+  const url = "/posts?userId=8";
   const maxAttempts = 3;
   const timeoutMs = 6_000;
   const cacheTtlMs = 60_000;
-  const cacheKey = `posts:${url}`;
+  const cacheKey = url;
 
   const cached = cacheClient.get<PostModel[]>(cacheKey);
   if (cached) return cached;

@@ -3,6 +3,10 @@ dist/
 # generated types
 .astro/
 .storyblok/
+.windsurf/
+.agent/
+.agents/
+
 
 # dependencies
 node_modules/
