@@ -7,8 +7,10 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
+    "skills:clean": "rm -rf .agent .agents",
+    "skills:sync": "node scripts/skills-sync.mjs",
     "skills:install": "node scripts/install-skills.mjs",
-    "types:storyblok": "node scripts/generate-storyblok-types.mjs"
+    "storyblok:types": "node scripts/generate-storyblok-types.mjs"
   },
   "dependencies": {
     "@astrojs/node": "^9.5.4",
