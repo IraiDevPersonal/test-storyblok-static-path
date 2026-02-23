@@ -7,6 +7,7 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
+    "skills:install": "node scripts/install-skills.mjs",
     "types:storyblok": "node scripts/generate-storyblok-types.mjs"
   },
   "dependencies": {
