@@ -2,7 +2,8 @@
 import type { GetStaticPaths } from "astro";
 import { useStoryblokApi } from "@storyblok/astro";
 import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro";
-import { isPreview } from "../lib/utils";
+import { IS_PREVIEW } from "astro:env/server";
+1;
 
 type Props = {
   story: any;
@@ -13,7 +14,7 @@ export const prerender = true;
 export const getStaticPaths = (async () => {
   const storyblokApi = useStoryblokApi();
   const { data } = await storyblokApi.get("cdn/stories", {
-    version: isPreview ? "draft" : "published",
+    version: IS_PREVIEW ? "draft" : "published",
   });
 
   return data.stories.map((story: any) => ({
