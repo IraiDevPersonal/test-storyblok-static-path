@@ -1,0 +1,45 @@
+---
+import { fetchPhotos } from "../../api/photos";
+import RootLayout from "../../components/layouts/RootLayout.astro";
+
+const data = await fetchPhotos();
+
+const html = `
+  <article class="w-full rounded-2xl border border-neutral-700 bg-neutral-900 shadow-lg shadow-neutral-100/5 p-4">
+    <header>
+      <h2 class="text-xl font-semibold">{{title}}</h2>
+    </header>
+    <section>
+      <img src="{{imageSrc}}" alt="{{title}}" />
+    </section>
+    <script>
+      alert("{{title}}");
+    </script>
+  </article>
+`;
+---
+
+<RootLayout title="Propuesta">
+  <main
+    class="min-h-screen bg-linear-to-b from-zinc-950 via-black to-zinc-950 mx-auto flex flex-col gap-y-4 max-w-5xl items-center px-6 py-16"
+  >
+    <header>
+      <h1 class="text-3xl font-bold">Propuesta Cards dinamicas</h1>
+    </header>
+
+    <section class="flex flex-wrap gap-2 justify-center-safe">
+      {
+        data
+          .slice(0, 3)
+          .map((item) => {
+            return html
+              .replaceAll("{{title}}", item.title)
+              .replace("{{imageSrc}}", item.url);
+          })
+          .map((item) => {
+            return <Fragment set:html={item} />;
+          })
+      }
+    </section>
+  </main>
+</RootLayout>
