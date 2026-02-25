@@ -1,6 +1,7 @@
 ---
 import RootLayout from "../components/layouts/RootLayout.astro";
 import Counter from "../components/ui/Counter.astro";
+import Link from "../components/ui/Link.astro";
 ---
 
 <RootLayout title="/">
@@ -28,20 +29,16 @@ import Counter from "../components/ui/Counter.astro";
               </p>
             </header>
 
-            <div class="flex flex-col gap-3 sm:flex-row sm:items-center">
-              <a
-                href="/home"
-                class="inline-flex items-center justify-center rounded-lg bg-orange-500 px-4 py-2.5 text-sm font-semibold text-black shadow-sm transition hover:bg-orange-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-400 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
-              >
-                Ir a Inicio
-              </a>
-              <a
-                href="/home"
-                class="inline-flex items-center justify-center rounded-lg border border-white/10 bg-white/5 px-4 py-2.5 text-sm font-medium text-white/90 transition hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/30 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
-              >
-                Ver páginas
-              </a>
-            </div>
+            <nav aria-label="Primary">
+              <ul class="flex flex-col gap-2 sm:flex-row sm:gap-3">
+                <li>
+                  <Link href="/home" label="Home" />
+                </li>
+                <li>
+                  <Link href="/about" label="About" />
+                </li>
+              </ul>
+            </nav>
 
             <div class="grid gap-3 sm:grid-cols-3">
               <div class="rounded-xl border border-white/10 bg-black/30 p-4">
