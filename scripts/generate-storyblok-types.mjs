@@ -95,12 +95,12 @@ function moveFile(src, dest, label) {
 
 // 1. Pull components from Storyblok
 console.log("📥 Step 1/3 — Pulling components from Storyblok...");
-run(`storyblok components pull --space ${SPACE_ID}`);
+run(`pnpx storyblok components pull --space ${SPACE_ID}`);
 
 // 2. Generate TypeScript types
 console.log("⚙️  Step 2/3 — Generating TypeScript types...");
 run(
-  `storyblok types generate --space ${SPACE_ID} --type-suffix Blok --filename storyblok.type`,
+  `pnpx storyblok types generate --space ${SPACE_ID} --type-suffix Blok --filename storyblok.type`,
 );
 
 // 3. Move files to src/types

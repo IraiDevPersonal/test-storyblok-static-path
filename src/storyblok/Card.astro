@@ -1,0 +1,28 @@
+---
+import { data } from "../pages/propuesta/data";
+import { sanitizedCard, getClassTokens } from "../lib/utils/sanitized-card";
+import type { CardBlok } from "../types/storyblok/test-space";
+import { twJoin } from "tailwind-merge";
+
+type Props = {
+  blok: CardBlok;
+};
+
+const { blok } = Astro.props;
+const textComponent = sanitizedCard(blok.content || "");
+const classTokens = getClassTokens(textComponent);
+---
+
+<section class="flex flex-wrap gap-2 justify-center-safe">
+  <div hidden aria-hidden="true" class={twJoin(classTokens)}></div>
+  {
+    data.map((photo) => {
+      const component = textComponent
+        .replaceAll("{{title}}", photo.title)
+        .replace("{{thumbnailUrl}}", photo.thumbnailUrl)
+        .replace("{{imageSrc}}", photo.url);
+
+      return <Fragment set:html={component} />;
+    })
+  }
+</section>

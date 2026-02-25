@@ -1,4 +1,6 @@
 ---
+import { twMerge } from "tailwind-merge";
+
 export interface Props {
   href: string;
   label: string;
@@ -9,10 +11,8 @@ const { href, label, className } = Astro.props;
 
 const baseClass =
   "inline-flex items-center justify-center rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-sm font-medium text-white/90 transition hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/30 focus-visible:ring-offset-2 focus-visible:ring-offset-black";
-
-const linkClass = `${baseClass} ${className ?? ""}`.trim();
 ---
 
-<a href={href} class={linkClass}>
+<a href={href} class={twMerge(baseClass, className)}>
   {label}
 </a>

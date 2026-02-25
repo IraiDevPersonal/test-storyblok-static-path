@@ -59,6 +59,7 @@ export default defineConfig({
         text_image_section: "storyblok/TextImageSection",
         header_section: "storyblok/HeaderSection",
         action_hero_section: "storyblok/ActionHeroSection",
+        card: "storyblok/Card",
       },
     }),
   ],

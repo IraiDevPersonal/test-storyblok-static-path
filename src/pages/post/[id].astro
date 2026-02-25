@@ -2,6 +2,7 @@
 // Obtiene todos los posts de la API y tipifica la prop del layout
 import { fetchPosts, type PostModel } from "../../api/post";
 import RootLayout from "../../components/layouts/RootLayout.astro";
+import BackButton from "../../components/ui/BackButton.astro";
 
 // Define la forma de las props que Astro inyectará en esta página en tiempo de build
 type Props = {
@@ -35,25 +36,7 @@ const { post } = Astro.props;
     <div class="mx-auto max-w-5xl px-6 py-10">
       <header class="mb-6 space-y-4">
         <div class="flex items-start gap-3">
-          <a
-            href="/"
-            aria-label="Volver"
-            onclick="if (history.length > 1) { history.back(); return false; }"
-            class="group mt-1 inline-flex size-10 items-center justify-center rounded-lg border border-white/10 bg-white/5 text-white/80 transition hover:border-orange-400/30 hover:bg-orange-500/10 hover:text-orange-300 hover:shadow-[0_0_0_1px_rgba(251,146,60,0.22)_inset,0_0_28px_rgba(249,115,22,0.22)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-400 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
-          >
-            <svg
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="size-5"
-            >
-              <path d="M15 18l-6-6 6-6"></path>
-            </svg>
-          </a>
-
+          <BackButton />
           <h1
             class="text-3xl font-semibold tracking-tight text-white first-letter:uppercase sm:text-5xl"
           >
