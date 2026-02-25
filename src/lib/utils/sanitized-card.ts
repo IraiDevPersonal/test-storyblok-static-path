@@ -41,8 +41,8 @@ export function sanitizedCard(htmlText: string): string {
   });
 }
 
-export function getClassTokens(htmlText: string): string[] {
-  return [...htmlText.matchAll(/\bclass="([^"]+)"/g)]
-    .map((match) => match[1].split(/\s+/))
-    .flat();
-}
+// export function getClassTokens(htmlText: string): string {
+//   return [...htmlText.matchAll(/\bclass="([^"]+)"/g)]
+//     .map((match) => match[1].split(/\s+/))
+//     .flat().join(" ")
+// }
