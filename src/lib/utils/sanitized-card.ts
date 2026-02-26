@@ -41,8 +41,23 @@ export function sanitizedCard(htmlText: string): string {
   });
 }
 
-// export function getClassTokens(htmlText: string): string {
-//   return [...htmlText.matchAll(/\bclass="([^"]+)"/g)]
-//     .map((match) => match[1].split(/\s+/))
-//     .flat().join(" ")
-// }
+export function extractClassTokens(htmlText: string): string[] {
+  // Extraer todas las clases de los atributos class del HTML
+  const classMatches = [...htmlText.matchAll(/class="([^"]+)"/g)];
+  const allClasses = classMatches
+    .map((match) => match[1].split(/\s+/))
+    .flat()
+    .filter((className) => className.trim() !== "");
+
+  // Eliminar duplicados y retornar array único
+  return [...new Set(allClasses)];
+}
+
+// Función para generar safelist dinámicamente
+export function generateSafelist(htmlContents: string[]): string[] {
+  const allClasses = htmlContents
+    .flatMap((content) => extractClassTokens(content))
+    .filter((className) => className.trim() !== "");
+
+  return [...new Set(allClasses)];
+}

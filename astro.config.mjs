@@ -44,6 +44,11 @@ export default defineConfig({
     server: {
       https: isPreview,
     },
+    css: {
+      postcss: {
+        plugins: [require('tailwindcss'), require('autoprefixer')],
+      },
+    },
   },
   integrations: [
     storyblok({
